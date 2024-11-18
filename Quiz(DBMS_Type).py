@@ -4,8 +4,8 @@ import random
 # MySQL connection setup
 db = mysql.connector.connect(
     host="localhost",
-    user="root",        # Replace with your MySQL username
-    password="Logical007",    # Replace with your MySQL password
+    user="Replace with your MySQL username",       
+    password="Replace with your MySQL password",    
     database="quiz_app"
 )
 cursor = db.cursor()
@@ -27,7 +27,6 @@ def save_score(user_id, topic, score):
     cursor.execute("INSERT INTO users (user_id, topic, score) VALUES (%s, %s, %s)", (user_id, topic, score))
     db.commit()
 
-# Main logic for user login and registration
 print("Hello User! This is a quiz app")
 
 name = input("Enter your name: ")
@@ -144,7 +143,6 @@ topics = {
     "4": ("DSA", questions_dsa)
 }
 
-# Quiz class
 class Quiz:
     def __init__(self, questions):
         self.questions = random.sample(questions, 5)  # Select 5 random questions
@@ -161,7 +159,7 @@ class Quiz:
             else:
                 self.answers[i] = int(answer)
 
-        # Reviewing unanswered questions
+        
         for i, (question, options, correct_answer) in enumerate(self.questions, 1):
             if self.answers[i] is None:
                 print(f"\nMarked for Review - Question {i}: {question}")
@@ -180,7 +178,6 @@ class Quiz:
         return score
 
 
-# Main loop for selecting topics and taking quiz
 while True:
     print("\nSelect a topic for the quiz:")
     print("1. Python")
@@ -198,7 +195,6 @@ while True:
 
         print(f"\nYour score: {score}/{len(quiz.questions)}")
 
-        # Save score in the database
         save_score(user_id, topic_name, score)
         print("Your score has been saved.")
     else:
